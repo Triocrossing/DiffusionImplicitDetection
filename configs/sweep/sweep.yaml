@@ -1,0 +1,30 @@
+program: src/sweep.py
+
+project: sweep_ladde
+
+description: "wandb sweep test"
+
+method: bayes
+
+metric:
+  name: val/acc_best
+  goal: maximize
+
+parameters:
+  model.optimizer.lr:
+    min: 0.002
+    max: 0.003
+  data.batch_size:
+    values: [4096]
+  model.optimizer.weight_decay:
+    min: 0.005
+    max: 0.015
+  model.net.dropout:
+    min: 0.0
+    max: 0.1
+
+command:
+  - ${interpreter}
+  - ${program}
+  - ${args_no_hyphens}
+  - logger=wandb

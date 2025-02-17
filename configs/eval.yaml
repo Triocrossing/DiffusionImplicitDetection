@@ -1,0 +1,21 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - data: dire # choose datamodule with `test_dataloader()` for evaluation
+  - model: dire_resnet
+  - logger: wandb
+  - trainer: gpu
+  - paths: default
+  - extras: default
+  - hydra: default
+
+task_name: "test"
+
+train: False
+test: True
+
+tags: ["test"]
+
+# passing checkpoint path is necessary for evaluation
+ckpt_path: ???
