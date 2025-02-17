@@ -1,0 +1,46 @@
+# @package _global_
+
+# to execute this experiment run:
+# python train.py experiment=example
+
+defaults:
+  - override /data: ladde
+  - override /model: coladde_resnet 
+  - override /callbacks: default
+  - override /trainer: default
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+
+tags: ["contrastive_feat", "test"]
+
+seed: null
+
+trainer:
+  min_epochs: 50
+  max_epochs: 100
+
+data:
+  batch_size: 256
+  train_test_split: [0.75, 0.15, 0.1]
+  mode: "cofeat"  # change this to "cofeat" to use contrastive features
+logger:
+  wandb:
+    tags: ${tags}
+
+callbacks:
+  model_checkpoint:
+    monitor: "val/acc"
+    mode: "max"
+    save_last: True
+    auto_insert_metric_name: False
+    save_top_k: 2
+    every_n_epochs: 50
+
+model:
+  _target_: src.models.coladde_triplet_module.CoLaDDeModule
+  net:
+    _target_: src.models.components.triplet_resnet.triplet_resnet50feat
+    num_classes: 1
+  optimizer:
+    weight_decay: 0.001

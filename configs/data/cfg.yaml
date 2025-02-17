@@ -1,0 +1,44 @@
+_target_: src.data.cfg_datamodule.CFGDataModule
+data_dir: ${paths.data_dir}
+
+training_dir:  /users/xwang/Work/dataset/SD_Detection #${paths.training_dir}
+validation_dir:  /users/xwang/Work/dataset/SD_Detection_val #${paths.training_dir}
+real_tag_list: [GenImage_real_50K,GenImage_real_50K_suppl_samp100,GenImage_real_50K_suppl_samp20,GenImage_real_50K_suppl_samp20_titan_160k]
+fake_tag_list: [sd4_suppl_samp20_titan_160k,sd4_suppl_samp20_hk,sd4_suppl_samp20_jz,sd4_suppl_samp20_titan,mj_val,sd4,sd5_val,adm_val,glide_val,wk_val,vq,biggan]
+# testing_dir: ${paths.testing_dir}
+
+batch_size: 512 # Needs to be divisible by the number of devices (e.g., if in a distributed setup)
+train_test_split: [0.99, 0.01]
+num_workers: 5
+pin_memory: False
+
+####### base setting ######
+class_bal : True
+loadSize : 256
+cropSize : 224
+epoch : "latest"
+serial_batches : False
+isTrain : True
+preproc_type : "concat2uncondb"
+val_mode: False
+
+####### train setting ######
+warmup : False
+warmup_epoch : 3
+earlystop : True
+earlystop_epoch : 5
+optim : "adam"
+new_optim : False
+loss_freq : 400
+save_latest_freq : 2000
+save_epoch_freq : 20
+save_top_k: 3
+continue_train : False
+epoch_count : 1
+last_epoch : -1
+nepoch : 400
+beta1 : 0.9
+lr : 0.0001
+init_type : "normal"
+init_gain : 0.02
+pretrained : True
