@@ -1,7 +1,6 @@
 #!/bin/bash
 # Run from root folder with: bash scripts/schedule.sh
 
-# TT
 DATA_DIR= # your dataset path / where you should put all the folders in the same directory
 
 REAL_TAG='[pd_real]'
@@ -11,11 +10,10 @@ str_list=('[pd_glide_val]' '[pd_sd4_val]' '[pd_sd5_val]' '[pd_wk_val]' '[pd_bigg
 
 ckpt=$1
 
-# Loop through the list
 for FAKE_TAG in "${str_list[@]}"; do
     echo "$FAKE_TAG"
 cleaned_str="${FAKE_TAG//[\[\]]/}"
-# diff: ladde_feat
+
 python src/eval.py \
   data=cfg \
   data.val_mode=True \
