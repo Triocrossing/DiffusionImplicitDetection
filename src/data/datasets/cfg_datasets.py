@@ -158,7 +158,7 @@ class CFGFeatureDataset(Dataset):
             )
         elif self.preproc_type == "concat2uncond":
             return torch.cat(
-                (sample_opt, (sample_opt - sample_uncond) ** 2, sample_uncond), dim=1
+                (sample_opt** 2, (sample_opt - sample_uncond) ** 2, sample_uncond** 2), dim=1
             )
         elif self.preproc_type == "concat_opt_uncond":
             return torch.cat((sample_opt, sample_uncond), dim=-1)
@@ -184,4 +184,4 @@ class CFGFeatureDataset(Dataset):
         # save memory
         del sample_opt, sample_cond, sample_uncond
 
-        return sample, label
+        return sample, label, file_opt

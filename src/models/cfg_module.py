@@ -47,7 +47,7 @@ class CFGModule(LightningModule):
 
         # for tracking best so far validation accuracy
         self.val_acc_best = MaxMetric()
-
+        
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Perform a forward pass through the model `self.net`.
 
@@ -155,7 +155,9 @@ class CFGModule(LightningModule):
             labels.
         :param batch_idx: The index of the current batch.
         """
-        loss, preds, targets = self.model_step(batch)
+        # Unpack batch
+        sample, target, _ = batch  # Adjust if using DataLoader with batch_size > 1
+        loss, preds, targets = self.model_step((sample, target))
 
         # update and log metrics
         self.test_loss(loss)
@@ -169,7 +171,6 @@ class CFGModule(LightningModule):
 
     def on_test_epoch_end(self) -> None:
         """Lightning hook that is called when a test epoch ends."""
-        pass
 
     def setup(self, stage: str) -> None:
         """Lightning hook that is called at the beginning of fit (train + validate), validate,
