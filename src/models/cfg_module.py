@@ -207,6 +207,22 @@ class CFGModule(LightningModule):
             }
         return {"optimizer": optimizer}
 
+    def predict_step(self, batch: Tuple[torch.Tensor, torch.Tensor, torch.Tensor], batch_idx: int) -> torch.Tensor:
+        """Perform a single prediction step on a batch of data.
+
+        :param batch: A batch of data (a tuple) containing the input tensor of images, target labels, and file paths.
+        :param batch_idx: The index of the current batch.
+        :return: A tensor of predictions.
+        """
+        # Unpack batch
+        sample, target, file_path = batch
+        
+        # Get predictions
+        logits = self.forward(sample).flatten()
+        preds = logits.sigmoid()
+        
+        return preds, target, file_path
+
 
 if __name__ == "__main__":
     _ = CFGModule(None, None, None, None)

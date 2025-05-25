@@ -2,14 +2,14 @@
 # Run from root folder with: bash scripts/schedule.sh
 
 # TT
-DATA_DIR= # your dataset path / where you should put all the folders in the same directory
+DATA_DIR=$1 # your dataset path / where you should put all the folders in the same directory
 
 REAL_TAG='[pd_real]'
 
-str_list=('[pd_glide_val]' '[pd_sd4_val]' '[pd_sd5_val]' '[pd_wk_val]' '[pd_biggan_val]' '[pd_sd4_lr64]' '[pd_sd4_jpeg_30]' '[pd_sd4_s5]')
+str_list=('[pd_glide]' '[pd_sd4]' '[pd_sd5]' '[pd_wk]' '[pd_biggan]' '[pd_sd4_lr64]' '[pd_sd4_jpeg_30]' '[pd_sd4_s5]')
 
 
-ckpt=$1
+ckpt=$2
 
 # Loop through the list
 for FAKE_TAG in "${str_list[@]}"; do
@@ -28,8 +28,7 @@ python src/eval.py \
   model=cfg_resnet \
   model.net._target_=src.models.components.resnet.resnet_50_cfg \
   model.net.num_classes=1 \
-  tags="['CFG, eval']" \
-  logger.wandb.name=${cleaned_str} \
+  logger=csv \
   task_name=${cleaned_str} \
   ckpt_path=${ckpt} \
 

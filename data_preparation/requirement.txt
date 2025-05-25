@@ -1,0 +1,4 @@
+natsort==8.4.0
+diffusers==0.20.2
+transformers==4.33.2
+huggingface_hub==0.18.0
