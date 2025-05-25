@@ -11,11 +11,10 @@ str_list=('[pd_glide]' '[pd_sd4]' '[pd_sd5]' '[pd_wk]' '[pd_biggan]' '[pd_sd4_lr
 
 ckpt=$2
 
-# Loop through the list
 for FAKE_TAG in "${str_list[@]}"; do
     echo "$FAKE_TAG"
 cleaned_str="${FAKE_TAG//[\[\]]/}"
-# diff: ladde_feat
+
 python src/eval.py \
   data=cfg \
   data.val_mode=True \
