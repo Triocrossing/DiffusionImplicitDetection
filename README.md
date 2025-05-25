@@ -2,8 +2,8 @@
 
 # Your Diffusion Model is an Implicit Synthetic Image Detector
 
-This repository contains the official implementation of the method described in our paper:  
-**"Your Diffusion Model is an Implicit Synthetic Image Detector."**
+This repository contains the official implementation of our paper:  
+**"Your Diffusion Model is an Implicit Synthetic Image Detector"**
 
 </div>
 
@@ -11,25 +11,44 @@ This repository contains the official implementation of the method described in 
 
 ## 📄 License
 
-This code is released under the [MIT License](LICENSE).
+This project is released under the [MIT License](LICENSE).
 
 ---
 
 ## 🚀 Getting Started
 
-To evaluate the method, simply run:
+To evaluate the method, run the following script:
 
-```bash
 bash evaluate.sh
-```
 
-### 📦 Checkpoint
+---
 
-You can download the pretrained checkpoint from [this link](https://drive.google.com/file/d/1Cjfrdbb6GBrf7omPdE_3c8IYVSPK977A/view?usp=sharing).
+## 📦 Pretrained Checkpoint
 
-### 📁 Evaluation Data
+Download the pretrained model checkpoint here:  
+https://drive.google.com/file/d/1Cjfrdbb6GBrf7omPdE_3c8IYVSPK977A/view?usp=sharing
 
-Some evaluation data can be found here:  
-[Download Evaluation Data](https://drive.google.com/file/d/1gv3hEL4Rup7GUxCQ43-YKRMhsEd_F92f/view?usp=sharing)
+---
+
+## 📁 Evaluation Data
+
+Sample evaluation data is available here:  
+https://drive.google.com/file/d/1gv3hEL4Rup7GUxCQ43-YKRMhsEd_F92f/view?usp=sharing
+
+---
+
+## 🔍 Using Your Own Data
+
+To evaluate on your own data:
+
+1. **Generate Latents**  
+   Run the script below to compute latents (you may want to modify it accordingly):
+
+   bash data_preparation/compute_latent.sh 
+
+2. **Run Inference**  
+   Use the script below to make predictions:
+
+   bash inference_custom_dataset.sh
 
 ---
